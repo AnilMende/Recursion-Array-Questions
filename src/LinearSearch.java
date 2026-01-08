@@ -1,10 +1,21 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class LinearSearch {
     public static void main(String[] args) {
-        int arr[] = {12,34,54,6,78,1};
+        int arr[] = {12,34,34,54,6,78,1};
 
-        System.out.println(find(arr,6,0));
-        System.out.println(findIndex(arr,54,0));
-        System.out.println(findLastIndex(arr,78,arr.length-1));
+        //System.out.println(find(arr,6,0));
+        //System.out.println(findIndex(arr,54,0));
+        //System.out.println(findLastIndex(arr,78,arr.length-1));
+
+        //findAllIndex(arr,34,0);
+        //System.out.println(list);
+
+        ArrayList<Integer> list = new ArrayList<>();
+        ArrayList<Integer> res = findAllIndexList(arr,34,0,list);
+        //Both the res and list are same they contain  the same elements
+        System.out.println(res);
     }
     static boolean find(int arr[], int target, int index){
         //base condition
@@ -43,5 +54,28 @@ public class LinearSearch {
         else{
             return findLastIndex(arr,target,index-1);
         }
+    }
+
+    //Adding the target elememt in to the list if it's occurred more than once
+    static ArrayList<Integer> list = new ArrayList<>();
+    static void findAllIndex(int arr[], int target, int index){
+        if(index == arr.length){
+            return;
+        }
+        if(arr[index] == target){
+            list.add(index);
+        }
+        findAllIndex(arr,target,index+1);
+    }
+
+    //Passing the List as Input
+    static ArrayList<Integer> findAllIndexList(int arr[], int target, int index, ArrayList<Integer> list){
+        if(index == arr.length){
+            return list;
+        }
+        if(arr[index] == target){
+            list.add(index);
+        }
+        return findAllIndexList(arr,target,index+1,list);
     }
 }
